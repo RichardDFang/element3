@@ -1,9 +1,13 @@
 import Tag from '../src/Tag.vue'
 import { mount } from '@vue/test-utils'
 import { ref, nextTick } from 'vue'
-import { setupGlobalOptions } from '../../../use/globalConfig'
+import { setupGlobalOptions } from '../../../composables/globalConfig'
 
 describe('Tag.vue', () => {
+  it('snapshot', () => {
+    const wrapper = mount(Tag)
+    expect(wrapper.element).toMatchSnapshot()
+  })
   it('normal render', () => {
     const wrapper = mount(Tag)
     const result = wrapper.findComponent(Tag).exists()

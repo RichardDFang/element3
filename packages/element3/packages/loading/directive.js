@@ -2,7 +2,7 @@ import { nextTick } from 'vue'
 import Loading from './Loading.vue'
 import { removeClass } from '../../src/utils/dom'
 
-import { createComponent } from '../../src/use/component'
+import { createComponent } from '../../src/composables/component'
 import merge from '../../src/utils/merge'
 import { addStyle } from './lib'
 
@@ -62,8 +62,8 @@ const loadingDirective = {
       }
     })
     el.options = options
-    el.instance = mask.ctx
-    el.mask = mask.ctx.$el
+    el.instance = mask.proxy
+    el.mask = mask.proxy.$el
     el.maskStyle = {}
 
     binding.value && toggleLoading(el, binding)

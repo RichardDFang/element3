@@ -1,5 +1,6 @@
 module.exports = {
-  testEnvironment: 'jsdom',
+  preset: 'ts-jest',
+  testEnvironment: 'jest-environment-jsdom-sixteen',
   setupFilesAfterEnv: ['./scripts/setupJestEnv.js'],
   roots: ['<rootDir>/src', '<rootDir>/packages', '<rootDir>/tests'],
   transform: {
@@ -9,11 +10,13 @@ module.exports = {
   moduleFileExtensions: ['vue', 'js', 'json', 'jsx', 'ts', 'tsx', 'node'],
   testMatch: [
     '**/tests/**/?(*.)+(test).[jt]s?(x)',
-    '**/__tests__/**/*.spec.js',
-    '**/tests/**/*.spec.js'
+    '**/tests/**/*spec.[jt]s?(x)',
+    '**/__tests__/**/*.spec.js'
   ],
   moduleNameMapper: {
     '^element-ui(.*)$': '<rootDir>$1',
-    '^main(.*)$': '<rootDir>/src$1'
-  }
+    '^main(.*)$': '<rootDir>/src$1',
+    '^lodash-es$': 'lodash'
+  },
+  transformIgnorePatterns: ['<rootDir>/node_modules/(?!lodash-es)']
 }

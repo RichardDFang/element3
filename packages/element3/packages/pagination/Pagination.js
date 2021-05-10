@@ -103,6 +103,8 @@ const useInternalPageCount = ({ pageCount, total, pageSize }) => {
       return Math.max(1, Math.ceil(total.value / pageSize.value))
     } else if (typeof pageCount?.value === 'number') {
       return Math.max(1, pageCount.value)
+    } else {
+      return 0
     }
   })
 
@@ -276,7 +278,7 @@ export default {
       pager: (
         <Pager
           currentPage={this.internalCurrentPage}
-          onUpdate:currentPage={this.onUpdate}
+          v-model={[this.internalCurrentPage, 'currentPage']}
           pageCount={this.internalPageCount}
           disabled={this.disabled}
         />

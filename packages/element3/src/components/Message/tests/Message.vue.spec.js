@@ -1,6 +1,7 @@
 import { mount, flushPromises } from '@vue/test-utils'
 import Message from '../src/Message.vue'
 import { h } from 'vue'
+import { expectHaveStyle } from '../../../../tests/helper'
 
 describe('Message.vue', () => {
   test('snapshot', () => {
@@ -187,24 +188,30 @@ describe('Message.vue', () => {
   test('verticalOffset', () => {
     const wrapper = mount(Message, {
       props: {
-        verticalOffset: 50
+        offset: 50
       }
     })
 
-    expect(wrapper.get('.el-message').element.style.top).toBe('50px')
+    expectHaveStyle(wrapper.get('.el-message'), {
+      top: '50px'
+    })
   })
 
-  test('update verticalOffset when called updateVerticalOffset', async () => {
+  test('update offset when called updateVerticalOffset', async () => {
     const wrapper = mount(Message, {
       props: {
-        verticalOffset: 50
+        offset: 50
       }
     })
 
-    expect(wrapper.get('.el-message').element.style.top).toBe('50px')
-    wrapper.vm.verticalOffsetVal = 100
+    expectHaveStyle(wrapper.get('.el-message'), {
+      top: '50px'
+    })
+    wrapper.vm.offsetVal = 100
     await flushPromises()
-    expect(wrapper.get('.el-message').element.style.top).toBe('100px')
+    expectHaveStyle(wrapper.get('.el-message'), {
+      top: '100px'
+    })
   })
 
   test('should not closed when mouseenter ', async () => {

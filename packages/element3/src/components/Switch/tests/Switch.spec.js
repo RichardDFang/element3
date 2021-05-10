@@ -1,6 +1,11 @@
 import Switch from '../src/Switch.vue'
 import { mount } from '@vue/test-utils'
+import { expectHaveStyle } from '../../../../tests/helper'
 describe('Switch', () => {
+  it('snapshot', () => {
+    const wrapper = mount(Switch)
+    expect(wrapper.element).toMatchSnapshot()
+  })
   it('modelValue', async () => {
     const wrapper = mount(Switch, {
       props: {
@@ -36,9 +41,9 @@ describe('Switch', () => {
       }
     })
 
-    expect(wrapper.find('.el-switch__core').attributes('style')).toContain(
-      'width: 50px'
-    )
+    expectHaveStyle(wrapper.get('.el-switch__core'), {
+      width: '50px'
+    })
   })
 
   it('should show text on the right label when set activeText', () => {
@@ -133,9 +138,9 @@ describe('Switch', () => {
       }
     })
 
-    expect(wrapper.find('.el-switch__core').attributes('style')).toContain(
-      'border-color: #ff0000'
-    )
+    expectHaveStyle(wrapper.get('.el-switch__core'), {
+      borderColor: '#ff0000'
+    })
   })
 
   it('core style contain border-color equal to #ff0000 when set inactiveColor', () => {
@@ -146,9 +151,9 @@ describe('Switch', () => {
       }
     })
 
-    expect(wrapper.find('.el-switch__core').attributes('style')).toContain(
-      'border-color: #ff0000'
-    )
+    expectHaveStyle(wrapper.get('.el-switch__core'), {
+      borderColor: '#ff0000'
+    })
   })
 
   it('modelValue should be forced to be equal to inactiveValue when modelValue not equal activeValue and inactiveValue ', () => {
@@ -161,5 +166,17 @@ describe('Switch', () => {
     })
 
     expect(wrapper.emitted('update:modelValue')).toEqual([['3']])
+  })
+
+  it('should emit change event when change value', async () => {
+    const wrapper = mount(Switch, {
+      props: {
+        modelValue: false
+      }
+    })
+
+    wrapper.trigger('click')
+
+    expect(wrapper.emitted('change')[0]).toEqual([true])
   })
 })

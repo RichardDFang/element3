@@ -13,13 +13,13 @@ import { ElButton } from './components/Button'
 import ElButtonGroup from '../packages/button-group'
 import { ElLink } from './components/Link'
 // Form
-import ElRadio from '../packages/radio'
-import ElRadioButton from '../packages/radio-button'
-import ElRadioGroup from '../packages/radio-group'
+import { ElRadio } from './components/Radio'
+import { ElRadioButton } from './components/RadioButton'
+import { ElRadioGroup } from './components/RadioGroup'
 import ElCheckbox from '../packages/checkbox'
 import ElCheckboxButton from '../packages/checkbox-button'
 import ElCheckboxGroup from '../packages/checkbox-group'
-import ElInput from '../packages/input'
+import { ElInput } from './components/Input'
 import ElInputNumber from '../packages/input-number'
 import ElSelect from '../packages/select'
 import ElOption from '../packages/option'
@@ -40,8 +40,12 @@ import ElFormItem from '../packages/form-item'
 // Data
 import ElTable from '../packages/table'
 import ElTableColumn from '../packages/table-column'
+
+import { ElNewTable } from '../src/components/Table'
+import { ElNewTableColumn } from '../src/components/TableColumn'
+
 import { ElTag } from './components/Tag'
-import ElProgress from '../packages/progress'
+import { ElProgress } from './components/Progress'
 import ElTree from '../packages/tree'
 import ElPagination from '../packages/pagination'
 import { ElBadge } from './components/Badge'
@@ -49,13 +53,13 @@ import { ElAvatar } from './components/Avatar'
 // Notice
 import ElAlert from '../packages/alert'
 
-import ElLoading, { useLoading } from '../packages/loading'
+import ElLoading from '../packages/loading'
 
 import { Message } from './components/Message'
 
-import ElMessageBox, { useMsgbox } from '../packages/message-box'
+import { Msgbox } from '../packages/message-box'
 
-import ElNotification, { useNotify } from '../packages/notification'
+import { Notification } from './components/Notification'
 // Navigation
 import ElMenu from '../packages/menu'
 import ElMenuItem from '../packages/menu-item'
@@ -76,7 +80,7 @@ import ElDialog from '../packages/dialog'
 import ElTooltip from '../packages/tooltip'
 import ElPopover from '../packages/popover'
 import ElPopconfirm from '../packages/popconfirm'
-import ElCard from '../packages/card'
+import { ElCard } from './components/Card'
 import ElCarousel from '../packages/carousel'
 import ElCarouselItem from '../packages/carousel-item'
 import ElCollapse from '../packages/collapse'
@@ -93,13 +97,15 @@ import ElScrollbar from '../packages/scrollbar'
 import ElAutocomplete from '../packages/autocomplete'
 
 import { version } from '../package.json'
-import { setupGlobalOptions } from './use/globalConfig.js'
+import { setupGlobalOptions } from './composables/globalConfig'
 
 const components = [
   ElRow,
   ElCol,
   ElHeader,
   ElFooter,
+  ElNewTable,
+  ElNewTableColumn,
   ElAside,
   ElMain,
   ElAlert,
@@ -189,11 +195,11 @@ const install = (app, opts = {}) => {
 
 function applyOptions(app) {
   app.config.globalProperties.$loading = ElLoading.service
-  app.config.globalProperties.$msgbox = ElMessageBox.service
-  app.config.globalProperties.$alert = ElMessageBox.service.alert
-  app.config.globalProperties.$confirm = ElMessageBox.service.confirm
-  app.config.globalProperties.$prompt = ElMessageBox.service.prompt
-  app.config.globalProperties.$notify = ElNotification.service
+  app.config.globalProperties.$msgbox = Msgbox
+  app.config.globalProperties.$alert = Msgbox.alert
+  app.config.globalProperties.$confirm = Msgbox.confirm
+  app.config.globalProperties.$prompt = Msgbox.prompt
+  app.config.globalProperties.$notify = Notification
   app.config.globalProperties.$message = Message
 }
 
@@ -204,6 +210,8 @@ const element3 = {
 
 export {
   version,
+  ElNewTable,
+  ElNewTableColumn,
   ElRow,
   ElCol,
   ElContainer,
@@ -284,9 +292,8 @@ export {
   ElScrollbar,
   ElAutocomplete,
   Message,
-  useLoading,
-  useMsgbox,
-  useNotify,
+  Msgbox,
+  Notification,
   install,
   setupGlobalOptions
 }

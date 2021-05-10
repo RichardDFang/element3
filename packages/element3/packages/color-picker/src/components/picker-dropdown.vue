@@ -72,15 +72,15 @@ import {
   watch
 } from 'vue'
 
-import { popperProps, usePopper } from '../../../../src/use/popper.js'
-import { useLocale } from '../../../../src/use/locale.js'
+import { popperProps, usePopper } from '../../../../src/composables/popper.js'
+import { useLocale } from '../../../../src/composables/locale.js'
 import SvPanel from './sv-panel'
 import HueSlider from './hue-slider'
 import AlphaSlider from './alpha-slider'
 import Predefine from './predefine'
 // import Popper from '../../../../src/utils/vue-popper'
 // import Locale from '../../../../src/mixins/locale'
-import ElInput from '../../../input'
+import { ElInput } from '../../../../src/components/Input'
 import { ElButton } from '../../../../src/components/Button'
 
 export default {
@@ -125,7 +125,9 @@ export default {
     const popperState = usePopper(props, context, { ...toRefs(state) })
     const currentColor = computed(() => {
       const parent = instance.parent
-      return !parent || !parent.ctx.showPanelColor ? '' : parent.ctx.color.value
+      return !parent || !parent.proxy.showPanelColor
+        ? ''
+        : parent.proxy.color.value
     })
 
     provide('currentColor', currentColor)

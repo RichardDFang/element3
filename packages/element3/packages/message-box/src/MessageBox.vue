@@ -115,9 +115,9 @@ import {
   ref,
   watch
 } from 'vue'
-import { popupProps, usePopup } from '../../../src/use/popup'
+import { popupProps, usePopup } from '../../../src/composables/popup'
 import Locale from '../../../src/mixins/locale'
-import ElInput from '../../input'
+import { ElInput } from '../../../src/components/Input'
 import { ElButton } from '../../../src/components/Button'
 import { addClass, removeClass } from '../../../src/utils/dom'
 import { t } from '../../../src/locale'

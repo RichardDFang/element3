@@ -1,5 +1,8 @@
 import loadingVue from './Loading.vue'
-import { createComponent, unmountComponent } from '../../src/use/component'
+import {
+  createComponent,
+  unmountComponent
+} from '../../src/composables/component'
 import { removeClass } from '../../src/utils/dom'
 import merge from '../../src/utils/merge'
 import { addStyle } from './lib'
@@ -48,9 +51,9 @@ const Loading = (options = {}) => {
       unmountComponent(instance)
     }
   })
-  addStyle(options, parent, instance.ctx)
+  addStyle(options, parent, instance.proxy)
 
-  parent.appendChild(instance.ctx.$el)
+  parent.appendChild(instance.proxy.$el)
 
   if (options.fullscreen) {
     fullscreenLoading = instance
@@ -62,7 +65,7 @@ const Loading = (options = {}) => {
 }
 
 const close = function () {
-  this.ctx.close()
+  this.proxy.close()
 }
 
 export default Loading

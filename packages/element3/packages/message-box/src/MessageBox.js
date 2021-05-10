@@ -1,6 +1,6 @@
 // #todo
 import { defineComponent, isVNode } from 'vue'
-import { createComponent } from '../../../src/use/component'
+import { createComponent } from '../../../src/composables/component'
 import msgboxVue from './MessageBox.vue'
 import merge from '../../../src/utils/merge'
 const messageBoxConstructor = defineComponent(msgboxVue)
@@ -107,7 +107,7 @@ const showNextMsg = () => {
   // }
 }
 
-const MessageBox = function (options, callback) {
+export const MessageBox = function (options, callback) {
   // if (Vue.prototype.$isServer) return
   if (typeof options === 'string' || isVNode(options)) {
     options = {
@@ -213,6 +213,3 @@ MessageBox.close = () => {
   msgQueue = []
   currentMsg = null
 }
-
-export default MessageBox
-export { MessageBox }

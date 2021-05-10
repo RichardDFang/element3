@@ -42,7 +42,7 @@ export { ElTag } from './tag'
 export { ElRate } from './rate'
 export { Message } from './message'
 export { useNotify } from './notification'
-export { useLoading, ElLoading } from './loading'
+export { ElLoading } from './loading'
 export { useMsgbox } from './message-box'
 export { ElSteps } from './steps'
 export { ElUpload } from './upload'
@@ -111,3 +111,10 @@ export type ComponentSize = ElementUIComponentSize
 
 /** Horizontal alignment */
 export type HorizontalAlignment = ElementUIHorizontalAlignment
+
+/** set GlobalOptions */
+export type GlobalOptions = {
+  size?: number | string
+  zIndex?: number
+}
+export function setupGlobalOptions(opts: GlobalOptions): void

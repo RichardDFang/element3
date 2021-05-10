@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import { popupProps, usePopup } from '../../src/use/popup'
-import { useEmitter } from '../../src/use/emitter'
+import { popupProps, usePopup } from '../../src/composables/popup'
+import { useEmitter } from '../../src/composables/emitter'
 import {
   toRefs,
   ref,
@@ -175,7 +175,7 @@ export default {
       emit('closed')
     }
     watch(visible, (val) => {
-      const el = instanc.ctx.$el
+      const el = instanc.proxy.$el
       if (val) {
         closed.value = false
         emit('open')
@@ -201,12 +201,12 @@ export default {
         rendered.value = true
         open()
         if (appendToBody.value) {
-          document.body.appendChild(instanc.ctx.$el)
+          document.body.appendChild(instanc.proxy.$el)
         }
       }
     })
     onUnmounted(() => {
-      const el = instanc.ctx.$el
+      const el = instanc.proxy.$el
       if (appendToBody.value && el && el.parentNode) {
         el.parentNode.removeChild(el)
       }

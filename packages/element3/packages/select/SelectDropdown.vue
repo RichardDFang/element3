@@ -9,8 +9,8 @@
 </template>
 
 <script type="text/babel">
-import { popperProps, usePopper } from '../../src/use/popper'
-import { useEmitter } from '../../src/use/emitter'
+import { popperProps, usePopper } from '../../src/composables/popper'
+import { useEmitter } from '../../src/composables/emitter'
 import {
   onMounted,
   inject,
@@ -83,14 +83,14 @@ export default {
 }
 
 function usePopperElm(elSelect) {
-  const { ctx } = getCurrentInstance()
+  const { proxy } = getCurrentInstance()
   const elms = reactive({
     referenceElm: null,
     popperElm: null
   })
   onMounted(() => {
     elms.referenceElm = elSelect.$refs.reference.$el
-    elSelect.popperElm = elms.popperElm = ctx.$el
+    elSelect.popperElm = elms.popperElm = proxy.$el
   })
   return { ...toRefs(elms) }
 }
